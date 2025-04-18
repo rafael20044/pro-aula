@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Usuarios;
+use App\Models\Usuario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class UsuariosController extends Controller
 {
@@ -12,7 +15,18 @@ class UsuariosController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            if (!$user = JWTAuth::parseToken()->authenticate()) {
+                return response()->json(['error' => 'Usuario no encontrado'], 404);
+            }
+        } catch (JWTException $e) {
+            return response()->json(['error' => 'Token inválido o ausente'], 401);
+        }
+    
+        return response()->json([
+            'message' => 'Hola ' . $user->name,
+        ]);
+        //return response()->json('soludar');
     }
 
     /**
@@ -20,13 +34,34 @@ class UsuariosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre1' => 'required|string',
+            'nombre2' => 'string',
+            'apellido1' => 'required|string',
+            'apellido2' => 'required|string',
+            'correo' => 'required|email',
+            'clave' => 'required'
+        ]);
+
+        $usuario = Usuario::create([
+            'nombre1' => $request->nombre1,
+            'nombre2' => $request->nombre2,
+            'apellido1' => $request->apellido1,
+            'apellido2' => $request->apellido2,
+            'correo' => $request->correo,
+            'clave' => Hash::make($request->clave)
+        ]);
+
+        if ($usuario) {
+            return response()->json(['mensaje' => 'usuario creado con exito', 'datos' => $usuario], 201);
+        }
+        return response()->json(['mensaje' => 'Error al crear el usuario'], 400);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Usuarios $usuarios)
+    public function show(Usuario $usuarios)
     {
         //
     }
@@ -34,7 +69,7 @@ class UsuariosController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Usuarios $usuarios)
+    public function update(Request $request, Usuario $usuarios)
     {
         //
     }
@@ -42,7 +77,7 @@ class UsuariosController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Usuarios $usuarios)
+    public function destroy(Usuario $usuarios)
     {
         //
     }
