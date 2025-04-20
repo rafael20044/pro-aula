@@ -1,0 +1,21 @@
+<div class="body-layout">
+    <header>
+        <a routerLink="/principal"> <img src="/favicon.ico" alt=""> Questopia </a>
+        <div class="buscador">
+            <input type="text" placeholder="Buscar pregunta">
+            <img src="/lupa.png" alt="">
+        </div>
+        <div class="logings">
+            <a>Log in</a>
+            <a>Sing up</a>
+        </div>
+    </header>
+    <nav>
+        <a routerLink="/home"> <img src="/casa.png" alt=""> Home</a>
+        <a routerLink="/principal"> <img src="/mensaje.png" alt=""> Questions</a>
+        <a routerLink="/nosotros"> <img src="/cuerpo.png" alt=""> Nosotros</a>
+    </nav>
+    <main>
+        <ng-content></ng-content>
+    </main>
+</div>
