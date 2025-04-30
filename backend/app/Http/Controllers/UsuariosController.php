@@ -15,18 +15,7 @@ class UsuariosController extends Controller
      */
     public function index()
     {
-        try {
-            if (!$user = JWTAuth::parseToken()->authenticate()) {
-                return response()->json(['error' => 'Usuario no encontrado'], 404);
-            }
-        } catch (JWTException $e) {
-            return response()->json(['error' => 'Token inválido o ausente'], 401);
-        }
-    
-        return response()->json([
-            'message' => 'Hola ' . $user->name,
-        ]);
-        //return response()->json('soludar');
+
     }
 
     /**
@@ -61,9 +50,13 @@ class UsuariosController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Usuario $usuarios)
+    public function show($id)
     {
-        //
+        $usuario = Usuario::find($id);
+        if (!$usuario) {
+            return response()->json(['mensaje' => 'Usuario no existente'], 404);
+        }
+        return response()->json(['usuario' => $usuario, 'preguntas' => $usuario->preguntas], 200);
     }
 
     /**

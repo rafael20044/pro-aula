@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Publicaciones;
+use App\Models\Respuesta;
 use Illuminate\Http\Request;
 
-class PublicacionesController extends Controller
+class RespuestaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -26,7 +26,7 @@ class PublicacionesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Publicaciones $publicaciones)
+    public function show()
     {
         //
     }
@@ -34,7 +34,7 @@ class PublicacionesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Publicaciones $publicaciones)
+    public function update(Request $request)
     {
         //
     }
@@ -42,7 +42,7 @@ class PublicacionesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Publicaciones $publicaciones)
+    public function destroy()
     {
         //
     }

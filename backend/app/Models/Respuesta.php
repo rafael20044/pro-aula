@@ -4,12 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Comentario extends Model
+class Respuesta extends Model
 {
     protected $fillable = ['usuario_id', 'publicacion_id', 'contenido'];
+    protected $table = 'preguntas';
 
     public function Publicacion()
     {
-        return $this->belongsTo(Publicacion::class);
+        return $this->belongsTo(Pregunta::class);
     }
 }

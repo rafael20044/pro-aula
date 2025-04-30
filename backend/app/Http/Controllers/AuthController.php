@@ -24,7 +24,7 @@ class AuthController extends Controller
         if (!$token) {
             return response()->json(['error' => 'Unauthorized', 'credencailes' => $credentials], 401);
         }
-        return response()->json(['token' => $token], 200);
+        return response()->json(['token' => $token, 'id' => Auth::user()->id], 200);
     }
 
     public function me()

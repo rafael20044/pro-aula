@@ -11,9 +11,9 @@ class Usuario extends User implements JWTSubject
     protected $fillable = ['nombre1', 'nombre2', 'apellido1', 'apellido2', 'correo', 'clave', 'rol', 'estado'];
     protected $hidden = ['clave'];
 
-    public function publicaciones()
+    public function preguntas()
     {
-        return $this->hasMany(Publicacion::class) ;
+        return $this->hasMany(Pregunta::class) ;
     }
 
     public function getAuthIdentifierName()

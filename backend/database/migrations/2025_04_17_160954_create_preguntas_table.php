@@ -12,7 +12,7 @@ return new class extends Migration
     private const ESTADOS = ['pendiente', 'resuelto', 'eliminado'];
     public function up(): void
     {
-        Schema::create('publicaciones', function (Blueprint $table) {
+        Schema::create('preguntas', function (Blueprint $table) {
             $table->id();
             $table->foreignId('usuario_id')->constrained('usuarios');
             $table->foreignId('etiqueta_id')->constrained('etiquetas');
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('publicaciones');
+        Schema::dropIfExists('preguntas');
     }
 };

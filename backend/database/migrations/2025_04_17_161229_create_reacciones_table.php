@@ -15,8 +15,8 @@ return new class extends Migration
         Schema::create('reacciones', function (Blueprint $table) {
             $table->id();
             $table->foreignId('usuario_id')->constrained('usuarios');
-            $table->foreignId('publicacion_id')->nullable(true)->constrained('publicaciones');
-            $table->foreignId('comentario_id')->nullable(true)->constrained('comentarios');
+            $table->foreignId('pregunta_id')->nullable(true)->constrained('preguntas');
+            $table->foreignId('respuesta_id')->nullable(true)->constrained('respuestas');
             $table->enum('tipo', self::TIPOS)->nullable(false);
             $table->timestamps();
         });
